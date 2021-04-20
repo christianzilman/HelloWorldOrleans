@@ -134,3 +134,4 @@ _NCrunch*
 HelloWorld/Client/bin/Debug/
 HelloWorld/Client/bin/Debug/netcoreapp3.1/Client.deps.json
 *.dll
+ HelloWorld/Client/bin/Debug/*
