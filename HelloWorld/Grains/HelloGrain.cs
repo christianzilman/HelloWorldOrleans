@@ -18,9 +18,7 @@ namespace Grains
         public Task<string> SayHello(string greeting)
         {
             var key = this.GetPrimaryKey();
-
-            this.DeactivateOnIdle();
-
+            //this.DeactivateOnIdle();
             return Task.FromResult($"You said: {greeting}, I say: hello. the key  {key}");
         }
 

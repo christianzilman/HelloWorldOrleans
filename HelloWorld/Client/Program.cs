@@ -20,7 +20,6 @@ namespace Client
         //static async Task<int> RunMainAsync()
         static int RunMain()
         {
-
             try
             {
                 using (var client = StartClient())
