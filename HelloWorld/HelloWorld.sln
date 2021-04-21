@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Grains", "Grains\Grains.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Interfaces", "Interfaces\Interfaces.csproj", "{1A5F2C97-2D65-44AC-A9BB-23EEBD92EF21}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client", "Client\Client.csproj", "{2879FE4E-185F-4853-9003-5E5155477C16}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Client", "Client\Client.csproj", "{2879FE4E-185F-4853-9003-5E5155477C16}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbMigration", "DbMigration\DbMigration.csproj", "{D30DC074-D00A-4E28-B992-A73646187B18}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{2879FE4E-185F-4853-9003-5E5155477C16}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2879FE4E-185F-4853-9003-5E5155477C16}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2879FE4E-185F-4853-9003-5E5155477C16}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D30DC074-D00A-4E28-B992-A73646187B18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D30DC074-D00A-4E28-B992-A73646187B18}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D30DC074-D00A-4E28-B992-A73646187B18}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D30DC074-D00A-4E28-B992-A73646187B18}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
