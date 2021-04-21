@@ -1,5 +1,6 @@
 ﻿using Interfaces;
 using Orleans;
+using Orleans.Providers;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -7,7 +8,8 @@ using System.Threading.Tasks;
 
 namespace Grains
 {
-    public class HelloGrain : Grain, IHello
+    [StorageProvider]
+    public class HelloGrain : Grain<GreetingArchive>, IHello
     {
         public override Task OnActivateAsync()
         {
@@ -15,11 +17,15 @@ namespace Grains
 
             return base.OnActivateAsync();
         }
-        public Task<string> SayHello(string greeting)
+        public async Task<string> SayHello(string greeting)
         {
-            var key = this.GetPrimaryKey();
+            State.Greetings.Add(greeting);
+
+            await WriteStateAsync();
+
+            var key = this.GetPrimaryKeyLong();
             //this.DeactivateOnIdle();
-            return Task.FromResult($"You said: {greeting}, I say: hello. the key  {key}");
+            return $"You said: {greeting}, I say: hello. the key  {key}";
         }
 
         public override Task OnDeactivateAsync()
@@ -28,5 +34,10 @@ namespace Grains
 
             return base.OnDeactivateAsync();
         }
+    }
+
+    public class GreetingArchive
+    {
+        public List<string> Greetings { get; private set; } = new List<string>();
     }
 }

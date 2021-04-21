@@ -24,14 +24,17 @@ namespace Client
             {
                 using (var client = StartClient())
                 {
-                    Guid helloId = new Guid("{2349992C-860A-4EDA-9590-000000000006}");
+                    //Guid helloId = new Guid("{2349992C-860A-4EDA-9590-000000000006}");
+                    //var grain = client.GetGrain<IHello>(helloId);
+                    var grain = client.GetGrain<IHello>(0);
+                    var grain1 = client.GetGrain<IHello>(1);
 
-                    var grain = client.GetGrain<IHello>(helloId);
                     var response = grain.SayHello("Good morning");
+                    var response1 = grain1.SayHello("Good afternoon");
+                    var response2 = grain1.SayHello("Good midday");
 
-                    var r = response.Result;
-
-                    Console.WriteLine(r);
+                    //var r = response.Result;
+                    Console.WriteLine(response.Result);
 
                     Console.WriteLine($"Client is initialized: {client.IsInitialized}");
                 }

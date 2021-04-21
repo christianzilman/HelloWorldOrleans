@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Interfaces
 {
-    public interface IHello: IGrainWithGuidKey//IGrainWithIntegerKey
+    public interface IHello: IGrainWithIntegerKey//IGrainWithIntegerKey
     {
         Task<string> SayHello(string greeting);
     }

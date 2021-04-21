@@ -135,3 +135,4 @@ HelloWorld/Client/bin/Debug/
 HelloWorld/Client/bin/Debug/netcoreapp3.1/Client.deps.json
 *.dll
 *.suo
+HelloWorld/.vs/*
