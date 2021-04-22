@@ -1,15 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using Grains;
 using Interfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
 using Orleans;
 using Orleans.Configuration;
 using Orleans.Hosting;
-using Orleans.Runtime;
-using Polly;
+using SiloHost.Filters;
+using Microsoft.Extensions.Logging;
 
 namespace SiloHost
 {
@@ -64,7 +67,21 @@ namespace SiloHost
                 options.GatewayPort = 30000;
                 options.AdvertisedIPAddress = IPAddress.Loopback;
             })
-            .AddAdoNetGrainStorageAsDefault(options => 
+            .UseDashboard()
+            .ConfigureServices(services =>
+           {
+               services.AddSingleton(s => CreateGrainMethodsList());
+               services.AddSingleton(s => new JsonSerializerSettings
+               {
+                   NullValueHandling = NullValueHandling.Ignore,
+                   Formatting = Formatting.None,
+                   TypeNameHandling = TypeNameHandling.None,
+                   ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
+                   PreserveReferencesHandling = PreserveReferencesHandling.Objects
+               });
+           })
+            .AddIncomingGrainCallFilter<LoggingFilter>()
+            .AddAdoNetGrainStorageAsDefault(options =>
             {
                 options.Invariant = orleansConfig.Invariant;
                 options.ConnectionString = orleansConfig.ConnectionString;
@@ -72,11 +89,25 @@ namespace SiloHost
             })
             //Implementations
             .ConfigureApplicationParts(parts => parts.AddApplicationPart(typeof(IHello).Assembly).WithReferences())
-            .ConfigureApplicationParts(parts => parts.AddApplicationPart(typeof(HelloGrain).Assembly).WithReferences());                 
+            .ConfigureApplicationParts(parts => parts.AddApplicationPart(typeof(HelloGrain).Assembly).WithReferences())
+            .ConfigureLogging(logging => logging.AddConsole());
 
             var host = builder.Build();
             await host.StartAsync();
             return host;
+        }
+
+        private static GrainInfo CreateGrainMethodsList()
+        {
+            var grainInterfaces = typeof(IHello).Assembly.GetTypes()
+                .Where(type => type.IsInterface)
+                .SelectMany(type => type.GetMethods()
+                    .Select(methodInfo => methodInfo.Name)).Distinct();
+
+            return new GrainInfo
+            {
+                Methods = grainInterfaces.ToList()
+            };
         }
 
         private static IConfigurationRoot LoadConfig()
@@ -96,6 +127,16 @@ namespace SiloHost
 
             return orleansConfig;
         }
+    }
+
+    public class GrainInfo
+    {
+        public GrainInfo()
+        {
+            Methods = new List<string>();
+        }
+
+        public List<string> Methods { get; set; }
     }
 
     public class OrleansConfig
