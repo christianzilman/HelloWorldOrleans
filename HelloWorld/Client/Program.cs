@@ -14,12 +14,12 @@ namespace Client
     {
         static void Main(string[] args)
         {
-            var v= RunMain();
+            var v= RunMainAsync();
             Console.ReadKey();
         }
 
         //static async Task<int> RunMainAsync()
-        static int RunMain()
+        static async Task<int> RunMainAsync()
         {
             try
             {
@@ -29,18 +29,30 @@ namespace Client
                     //var grain = client.GetGrain<IHello>(helloId);
                     RequestContext.Set("traceId", Guid.NewGuid());
 
-                    var grain = client.GetGrain<IHello>(0);
-                    var response = grain.SayHello("Good morning");
+                    //var grain = client.GetGrain<IHello>(0);
+                    //var response = grain.SayHello("Good morning");
 
-                    RequestContext.Set("traceId", Guid.NewGuid());
-                    var grain1 = client.GetGrain<IHello>(1);                   
-                    var response1 = grain1.SayHello("Good afternoon");
+                    //RequestContext.Set("traceId", Guid.NewGuid());
+                    //var grain1 = client.GetGrain<IHello>(1);                   
+                    //var response1 = grain1.SayHello("Good afternoon");
 
 
-                    var response2 = grain1.SayHello("Good midday");
+                    //var response2 = grain1.SayHello("Good midday");
+
 
                     //var r = response.Result;
-                    Console.WriteLine(response.Result);
+                    //Console.WriteLine(response.Result);
+
+
+                    var grain = client.GetGrain<IGreetingsGrain>(0);
+                    await grain.SendGreetings("Hello 2");
+
+                    var grain1 = client.GetGrain<IGreetingsGrain>(0);
+                    await grain1.SendGreetings("Morning 2");
+
+                    var grain2 = client.GetGrain<IGreetingsGrain>(0);
+                    await  grain1.SendGreetings("Afternoon 2");
+
 
                     Console.WriteLine($"Client is initialized: {client.IsInitialized}");
                 }
