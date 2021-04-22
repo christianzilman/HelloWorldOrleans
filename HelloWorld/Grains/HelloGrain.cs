@@ -1,6 +1,8 @@
 ﻿using Interfaces;
+using Microsoft.Extensions.Logging;
 using Orleans;
 using Orleans.Providers;
+using Orleans.Runtime;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -11,6 +13,13 @@ namespace Grains
     [StorageProvider]
     public class HelloGrain : Grain<GreetingArchive>, IHello
     {
+        private readonly ILogger<HelloGrain> _logger;
+
+        public HelloGrain(ILogger<HelloGrain> logger)
+        {
+            _logger = logger;
+        }
+
         public override Task OnActivateAsync()
         {
             Console.WriteLine("OnActivate is called");
@@ -25,6 +34,11 @@ namespace Grains
 
             var key = this.GetPrimaryKeyLong();
             //this.DeactivateOnIdle();
+
+            var traceId = RequestContext.Get("traceId");
+
+            _logger.LogInformation($"TraceId: {traceId}");
+
             return $"You said: {greeting}, I say: hello. the key  {key}";
         }
 

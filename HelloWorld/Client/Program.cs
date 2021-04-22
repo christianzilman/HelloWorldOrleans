@@ -6,6 +6,7 @@ using Orleans.Configuration;
 using Orleans.Hosting;
 using Orleans.Runtime;
 using Polly;
+using Microsoft.Extensions.Logging;
 
 namespace Client
 {
@@ -26,11 +27,16 @@ namespace Client
                 {
                     //Guid helloId = new Guid("{2349992C-860A-4EDA-9590-000000000006}");
                     //var grain = client.GetGrain<IHello>(helloId);
-                    var grain = client.GetGrain<IHello>(0);
-                    var grain1 = client.GetGrain<IHello>(1);
+                    RequestContext.Set("traceId", Guid.NewGuid());
 
+                    var grain = client.GetGrain<IHello>(0);
                     var response = grain.SayHello("Good morning");
+
+                    RequestContext.Set("traceId", Guid.NewGuid());
+                    var grain1 = client.GetGrain<IHello>(1);                   
                     var response1 = grain1.SayHello("Good afternoon");
+
+
                     var response2 = grain1.SayHello("Good midday");
 
                     //var r = response.Result;
@@ -75,6 +81,7 @@ namespace Client
                     // Clustering provider
                     .UseLocalhostClustering()
                     .ConfigureApplicationParts(parts => parts.AddApplicationPart(typeof(IHello).Assembly))
+                    //.ConfigureLogging(logging => logging.AddConsole())
                     .Build();
 
                     client.Connect().GetAwaiter().GetResult();

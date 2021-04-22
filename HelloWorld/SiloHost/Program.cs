@@ -13,6 +13,7 @@ using Orleans.Configuration;
 using Orleans.Hosting;
 using SiloHost.Filters;
 using Microsoft.Extensions.Logging;
+using SiloHost.Context;
 
 namespace SiloHost
 {
@@ -70,6 +71,7 @@ namespace SiloHost
             .UseDashboard()
             .ConfigureServices(services =>
            {
+               services.AddSingleton<IOrleansRequestContext, OrleansRequestContext>();
                services.AddSingleton(s => CreateGrainMethodsList());
                services.AddSingleton(s => new JsonSerializerSettings
                {
