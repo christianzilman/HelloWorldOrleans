@@ -11,7 +11,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Interfaces", "Interfaces\In
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Client", "Client\Client.csproj", "{2879FE4E-185F-4853-9003-5E5155477C16}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbMigration", "DbMigration\DbMigration.csproj", "{D30DC074-D00A-4E28-B992-A73646187B18}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DbMigration", "DbMigration\DbMigration.csproj", "{D30DC074-D00A-4E28-B992-A73646187B18}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SiloHostClustering", "SiloHostClustering\SiloHostClustering.csproj", "{549FB49E-28BF-4284-9418-B6EB48A14A58}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientClustering", "ClientClustering\ClientClustering.csproj", "{A9CA4DAB-158C-4348-B10D-3929204566AE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SiloHostClusteringSecond", "SiloHostClusteringSecond\SiloHostClusteringSecond.csproj", "{0D68B5B3-D162-4643-B03D-BEBDE433AF2A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +45,18 @@ Global
 		{D30DC074-D00A-4E28-B992-A73646187B18}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D30DC074-D00A-4E28-B992-A73646187B18}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D30DC074-D00A-4E28-B992-A73646187B18}.Release|Any CPU.Build.0 = Release|Any CPU
+		{549FB49E-28BF-4284-9418-B6EB48A14A58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{549FB49E-28BF-4284-9418-B6EB48A14A58}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{549FB49E-28BF-4284-9418-B6EB48A14A58}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{549FB49E-28BF-4284-9418-B6EB48A14A58}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A9CA4DAB-158C-4348-B10D-3929204566AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9CA4DAB-158C-4348-B10D-3929204566AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9CA4DAB-158C-4348-B10D-3929204566AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9CA4DAB-158C-4348-B10D-3929204566AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D68B5B3-D162-4643-B03D-BEBDE433AF2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D68B5B3-D162-4643-B03D-BEBDE433AF2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D68B5B3-D162-4643-B03D-BEBDE433AF2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D68B5B3-D162-4643-B03D-BEBDE433AF2A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
